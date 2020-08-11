@@ -29,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
 
                             //View::share('single', \App\Post::latest('created_at')->paginate(1));
 
-        View::share('categories', \App\Category::get());
-        View::share('tags', \App\Tag::paginate());
-        View::share('postys', \App\Post::latest('created_at')->paginate(5));
+        // View::share('categories', \App\Category::get());
+        // View::share('tags', \App\Tag::paginate());
+        // View::share('postys', \App\Post::latest('created_at')->paginate(5));
     }
 }

@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin', function(){
-    return view('admin.dashboard');
-})->name('admin.blog');
-
 //|------------------------------------------------------------------------
 Route::get('/', function(){
     $posts=\App\Post::latest('created_at')->paginate(5);
@@ -300,3 +296,50 @@ $uri=$_SERVER['SCRIPT_FILENAME'];//E:/OpenServer/OpenServer/domains/hillel/less2
     //return view('trash.admin',['content'=>$content]);
     //require '../public/matrix-admin/html/ltr/index.html';
 });
+// //
+// //|------------------------------------------Admin---------------------------------------------------------
+Route::get('/admin', function(){
+    return view('adminlte.dashboard');
+})->name('admin.blog');
+// //|
+// //|----Categories
+// //|
+// Route::resources([
+//     '/admin/categories' => 'CategoryControllerAdmin'
+// ]);
+//
+//Index Общий перечень объектов
+Route::get('/index.categories', 'CategoryControllerAdmin@index')->name('categories.index');
+//Create Создание
+Route::get('/create.categories.create', 'CategoryControllerAdmin@create')->name('categories.create');
+//Store Сохранение
+Route::post('/store.categories', 'CategoryControllerAdmin@store')->name('categories.store');
+//Show Просмотр
+Route::get('/show.categories.{category?}', 'CategoryControllerAdmin@show')->name('categories.show');
+//Edit Редактирование
+Route::get('/edit.categories.{category?}', 'CategoryControllerAdmin@edit')->name('categories.edit');
+//Update Обновление
+Route::put('/update.categories.{category?}', 'CategoryControllerAdmin@update')->name('categories.update');
+//Delete Уничтожение
+Route::delete('/delete.categories.{category?}', 'CategoryControllerAdmin@destroy')->name('categories.destroy');
+// //|
+// //|----Tags
+// //|
+// Route::resources([
+//     '/admin/tags' => 'TagControllerAdmin'
+// ]);
+//
+//Index Общий перечень объектов
+Route::get('/admin/tags', 'TagControllerAdmin@index')->name('tags.index');
+//Create Создание
+Route::get('/admin/tags/create', 'TagControllerAdmin@create')->name('tags.create');
+//Store Сохранение
+Route::post('/admin/tags', 'TagControllerAdmin@store')->name('tags.store');
+//Show Просмотр
+Route::get('/admin/tags/{tag?}', 'TagControllerAdmin@show')->name('tags.show');
+//Edit Редактирование
+Route::get('/admin/tags/{tag?}/edit', 'TagControllerAdmin@edit')->name('tags.edit');
+//Update Обновление
+Route::put('/admin/tags/{tag?}', 'TagControllerAdmin@update')->name('tags.update');
+//Delete Уничтожение
+Route::delete('/admin/tags/{tag?}', 'TagControllerAdmin@destroy')->name('tags.destroy');
